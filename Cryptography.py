@@ -1,6 +1,5 @@
 import random
 import io
-import os
 import time
 
 def encryptNewFile(name, secureKey):
@@ -16,6 +15,29 @@ def encryptNewFile(name, secureKey):
             strk.append(stra[i].to_bytes(1, byteorder="big", signed="True"))
 
     with open("Arquivos\\"+name,'rb+') as writer:
+        writer.seek(4)
+        for i in range(lenf):
+            writer.write(strk[i])
+
+def encrypt():
+    name = input("Qual o nome do arquivo? ")
+    with open(name,'rb') as reader:
+
+        secureKey = random.randrange(900000)
+        print("Sua chave de criptografia eh: ",secureKey)
+        secureKey = secureKey.to_bytes(4,byteorder='big', signed=True)
+
+        stri = reader.readline()
+        lenf = len(stri)
+        stra =[]
+        for i in range (lenf):
+            stra.append((stri[i]) + 4)    
+        strk = []
+        for i in range (lenf):
+            strk.append(stra[i].to_bytes(1, byteorder="big", signed="True"))
+
+    with open(name,'rb+') as writer:
+        writer.write(secureKey)
         writer.seek(4)
         for i in range(lenf):
             writer.write(strk[i])
@@ -89,6 +111,7 @@ def menu():
             sair = False
         elif option == "1":
             print("\n\t**Criptografar um arquivo**\n")
+            encrypt()
             sair = False
         elif option == "2":
             print("\n\t**Descriptografar arquivo**\n")
