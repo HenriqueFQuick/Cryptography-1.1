@@ -3,7 +3,7 @@ import io
 import time
 
 def encryptNewFile(name, secureKey):
-    with open("Arquivos\\"+name,'rb') as reader:
+    with open(name,'rb') as reader:
         reader.seek(4)
         stri = reader.readline()
         lenf = len(stri)
@@ -14,7 +14,7 @@ def encryptNewFile(name, secureKey):
         for i in range (lenf):
             strk.append(stra[i].to_bytes(1, byteorder="big", signed="True"))
 
-    with open("Arquivos\\"+name,'rb+') as writer:
+    with open(name,'rb+') as writer:
         writer.seek(4)
         for i in range(lenf):
             writer.write(strk[i])
@@ -49,7 +49,7 @@ def descrypt():
     while tentativas > 0:
         givenkey = int(input("Qual eh a sua chave de criptografia? "))
         lenf = 0
-        with open("Arquivos\\"+name, 'rb') as file:
+        with open(name, 'rb') as file:
             securkey = file.read(4)
             securekey = int.from_bytes(securkey, byteorder="big", signed="True")
             if securekey == givenkey:
@@ -69,7 +69,7 @@ def descrypt():
                 print("Key errada")  
                 time.sleep(1)
 
-        with open("Arquivos\\"+name,'wb') as writer:
+        with open(name,'wb') as writer:
             for i in range(lenf):
                 writer.write(strk[i])
             print("\nArquivo descriptografado com sucesso!\n")
@@ -78,7 +78,7 @@ def descrypt():
 def writeFile():
     try:
         name = input("Qual eh o nome do arquivo? ")
-        arq = open("Arquivos\\"+name,'wb')
+        arq = open(name,'wb')
     except FileExistsError:
         print("Arquivo ja existe")
     write = input("Digite o que deseja escrever no arquivo: ")
