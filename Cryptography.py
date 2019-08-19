@@ -2,6 +2,7 @@ import random
 import io
 import time
 
+#metodo para criar e encriptar um arquivo
 def encryptNewFile(name, secureKey):
     try:
         with open(name,'rb') as reader:
@@ -22,6 +23,7 @@ def encryptNewFile(name, secureKey):
     except OverflowError:
         print("\nErro de OverFlow")
 
+#metodo parar encriptar um arquivo ja existente
 def encrypt():
     try:
         name = input("Qual o nome do arquivo? ")
@@ -48,7 +50,7 @@ def encrypt():
     except OverflowError:
         print("\nErro de OverFlow")
 
-        
+#metodo para desencriptar arquivo       
 def descrypt():
     try:
         name = input("Qual eh o nome do arquivo? ")
@@ -84,6 +86,7 @@ def descrypt():
     except OverflowError:
         print("\nErro de OverFlow")
 
+#metodo para criar e escrever no novo arquivo
 def writeFile():
     try:
         name = input("Qual eh o nome do arquivo? ")
